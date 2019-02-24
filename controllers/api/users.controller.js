@@ -14,10 +14,10 @@ module.exports = router;
 
 function authenticateUser(req, res) {
     userService.authenticate(req.body.username, req.body.password)
-        .then(function (token) {
-            if (token) {
+        .then(function (response) {
+            if (response) {
                 // authentication successful
-                res.send({ token: token });
+                res.send({ userId: response.userId, token: response.token });
             } else {
                 // authentication failed
                 res.status(401).send('Username or password is incorrect');
@@ -39,7 +39,7 @@ function registerUser(req, res) {
 }
 
 function getCurrentUser(req, res) {
-    userService.getById(req.user.sub)
+    userService.getById(req.session.userId)
         .then(function (user) {
             if (user) {
                 res.send(user);
@@ -53,7 +53,7 @@ function getCurrentUser(req, res) {
 }
 
 function updateUser(req, res) {
-    var userId = req.user.sub;
+    var userId = req.session.userId;
     if (req.params._id !== userId) {
         // can only update own account
         return res.status(401).send('You can only update your own account');
@@ -69,7 +69,7 @@ function updateUser(req, res) {
 }
 
 function deleteUser(req, res) {
-    var userId = req.user.sub;
+    var userId = req.session.userId;
     if (req.params._id !== userId) {
         // can only delete own account
         return res.status(401).send('You can only delete your own account');
