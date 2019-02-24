@@ -9,6 +9,7 @@ var config = require('config.json');
 var port = process.env.PORT || 8092;
 var apiPort = 9050; // agora escutando em uma porta diferente
 
+app.use(express.static( __dirname + '/libs/'));
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({ extended: false }));
