@@ -3,7 +3,7 @@
 
     angular
         .module('app')
-        .controller('question.controller', Controller);
+        .controller('Question.controller', Controller);
 
     function Controller($window, QuestionService, FlashService) {
         var vm = this;
@@ -12,19 +12,13 @@
         vm.saveQuestion = saveQuestion;
         vm.deleteUser = deleteUser;
 
-        initController();
-
-        function initController() {
-            // get current user
-            QuestionService.GetCurrent().then(function (user) {
-                vm.user = user;
-            });
-        }
+        
 
         function saveQuestion() {
-            QuestionService.Update(vm.question)
+            
+            QuestionService.Create(vm.question)
                 .then(function () {
-                    FlashService.Success('User updated');
+                    FlashService.Success('Question Created');
                 })
                 .catch(function (error) {
                     FlashService.Error(error);

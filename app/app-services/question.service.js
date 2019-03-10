@@ -35,7 +35,7 @@
         }
 
         function Create(question) {
-            return $http.post('/api/users', user).then(handleSuccess, handleError);
+            return $http.post('/api/question/register', question).then(handleSuccess, handleError);
         }
 
         function Update(user) {
