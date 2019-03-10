@@ -6,7 +6,7 @@ var questionService = require('services/question.service');
 // routes
 router.post('/authenticate', authenticateUser);
 router.post('/register', registerQuestion);
-router.get('/current', getCurrentUser);
+router.get('/all', getAllQuestion);
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
 
@@ -38,11 +38,11 @@ function registerQuestion(req, res) {
         });
 }
 
-function getCurrentUser(req, res) {
-    userService.getById(req.session.userId)
-        .then(function (user) {
-            if (user) {
-                res.send(user);
+function getAllQuestion(req, res) {
+    questionService.getAllQuestion()
+        .then(function (questions) {
+            if (questions) {
+                res.send(questions);
             } else {
                 res.sendStatus(404);
             }

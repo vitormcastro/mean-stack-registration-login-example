@@ -8,7 +8,6 @@
     function Service($http, $q) {
         var service = {};
 
-        service.GetCurrent = GetCurrent;
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
@@ -16,14 +15,10 @@
         service.Update = Update;
         service.Delete = Delete;
 
-        return service;
-
-        function GetCurrent() {
-            return $http.get('/api/users/current').then(handleSuccess, handleError);
-        }
+        return service;        
 
         function GetAll() {
-            return $http.get('/api/users').then(handleSuccess, handleError);
+            return $http.get('/api/question/all').then(handleSuccess, handleError);
         }
 
         function GetById(_id) {

@@ -14,6 +14,7 @@ service.getById = getById;
 service.create = create;
 service.update = update;
 service.delete = _delete;
+service.getAllQuestion = getAll;
 
 module.exports = service;
 
@@ -138,6 +139,36 @@ function _delete(_id) {
 
             deferred.resolve();
         });
+
+    return deferred.promise;
+}
+
+function  getAll(){
+    var deferred = Q.defer();
+
+    db.questions.find({}).toArray(function(err,questions){
+        console.log(questions);
+        if (err) deferred.reject(err.name + ': ' + err.message);
+
+        if (questions) {
+            var questionArray = "{\"questions\": [ ";
+            var i = 0;
+            while(i < questions.length){
+                if(i>0) questionArray = questionArray + ", ";
+                questionArray = questionArray+"\""+questions[i].question+"\"";
+                i = i+1;
+            }
+           
+               
+            
+            questionArray = questionArray+"]}";
+
+            deferred.resolve(questionArray);
+        } else {
+     
+            deferred.resolve();
+        }
+    });
 
     return deferred.promise;
 }
