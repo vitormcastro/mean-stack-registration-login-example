@@ -11,7 +11,7 @@
         vm.question = null;
         vm.allQuestion = null;
         vm.saveQuestion = saveQuestion;
-        vm.deleteUser = deleteUser;
+        vm.deleteQuestion = deleteQuestion;
         vm.getAll = getAll;
 
         
@@ -27,11 +27,10 @@
                 });
         }
 
-        function deleteUser() {
-            QuestionService.Delete(vm.user._id)
+        function deleteQuestion() {
+            QuestionService.Delete(vm.question)
                 .then(function () {
-                    // log user out
-                    $window.location = '/login';
+                   FlashService.Success('Question Deleted');
                 })
                 .catch(function (error) {
                     FlashService.Error(error);

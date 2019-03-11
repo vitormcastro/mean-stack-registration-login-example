@@ -9,10 +9,7 @@
         var service = {};
 
         service.GetAll = GetAll;
-        service.GetById = GetById;
-        service.GetByUsername = GetByUsername;
         service.Create = Create;
-        service.Update = Update;
         service.Delete = Delete;
 
         return service;        
@@ -21,24 +18,12 @@
             return $http.get('/api/question/all').then(handleSuccess, handleError);
         }
 
-        function GetById(_id) {
-            return $http.get('/api/users/' + _id).then(handleSuccess, handleError);
-        }
-
-        function GetByUsername(username) {
-            return $http.get('/api/users/' + username).then(handleSuccess, handleError);
-        }
-
         function Create(question) {
             return $http.post('/api/question/register', question).then(handleSuccess, handleError);
         }
 
-        function Update(user) {
-            return $http.put('/api/users/' + user._id, user).then(handleSuccess, handleError);
-        }
-
-        function Delete(_id) {
-            return $http.delete('/api/users/' + _id).then(handleSuccess, handleError);
+        function Delete(question) {
+            return $http.delete('/api/question/delete/' + question.question).then(handleSuccess, handleError);
         }
 
         // private functions
