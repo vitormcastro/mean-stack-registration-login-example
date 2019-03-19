@@ -37,17 +37,22 @@ function getAllQuestion(req, res) {
 }
 
 function deleteQuestion(req, res) {
-    var questionID = questionService.getQuestion(req);
-    if (questionID) {
-        questionService.delete(questionID)
-        .then(function () {
-            res.sendStatus(200);
-        })
-        .catch(function (err) {
-            res.status(400).send(err);
-        });
+    questionService.getQuestion(req).then(function(questionID){
+        if (questionID) {
+            questionService.delete(questionID) .then(function () {
+                res.sendStatus(200);
+            })
+            .catch(function (err) {
+                res.status(400).send(err);
+            });
+        }
+        else{
+            res.status(400).send("Codigo Inexistente");
+        }
+    });
+    
+       
         
     }
 
    
-}
