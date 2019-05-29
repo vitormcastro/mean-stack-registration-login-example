@@ -16,6 +16,13 @@
         </div>
     </form>
     <div class="question-saved">
-        {{vm.allQuestion}}
+        <table border="1">
+            <tr>
+                <th>Questão</th>
+            </tr>
+            <tr ng-repeat="x in vm.allQuestion">
+                <th>{{x}}</th>
+            </tr>
+        </table>
     </div>
 </div>

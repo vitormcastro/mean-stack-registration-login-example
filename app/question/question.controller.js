@@ -40,7 +40,7 @@
         function getAll(){
             QuestionService.GetAll()
                 .then(function(questions){
-                    vm.allQuestion = JSON.stringify(questions);
+                    vm.allQuestion = questions.questions;
                 })
                 .catch(function (error) {
                     FlashService.Error(error);

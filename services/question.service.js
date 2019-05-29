@@ -90,7 +90,7 @@ function getQuestion(questionParam){
         if (err) deferred.reject(err.name + ': ' + err.message);
 
         if (question) {
-            deferred.resolve(question._id.id);
+            deferred.resolve(question._id);
         }else{
             deferred.resolve();
         }
